@@ -1,7 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"TimeTilt/system/slotmachine/buffalo"
+)
 
 func main() {
-	fmt.Println("Hello, 世界")
+	buffalo.Run()
+
+	// bm := buffalo.MockMachine()
+
+	// bm.ShowWindow()
+	// a := bm.Audit()
+
+	// bm.ProcessBalance(a)
+
+	// fmt.Println(a)
 }
