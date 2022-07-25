@@ -20,6 +20,7 @@ const (
 	CardSunset3Name string = "sunset3"
 
 	Payrate payrate = ""
+	Config  config  = ""
 )
 
 type payrate string
@@ -82,3 +83,12 @@ func GetPayRate(name string) []int {
 		return nil
 	}
 }
+
+type config string
+
+func (c config) ReelBaseConfig() []int  { return []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} }
+func (c config) ReelOneConfig() []int   { return []int{3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 0} }
+func (c config) ReelTwoConfig() []int   { return []int{3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 1, 1} }
+func (c config) ReelThreeConfig() []int { return []int{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 1} }
+func (c config) ReelFourConfig() []int  { return []int{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 1} }
+func (c config) ReelFiveConfig() []int  { return []int{1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 1, 0} }
