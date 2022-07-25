@@ -7,12 +7,6 @@ import (
 func main() {
 	buffalo.Run()
 
-	// bm := buffalo.MockMachine()
-
-	// bm.ShowWindow()
-	// a := bm.Audit()
-
-	// bm.ProcessBalance(a)
-
-	// fmt.Println(a)
+	//bm := buffalo.NewMachine(model.StartConfig{WindowSize: 4})
+	//bm.Show()
 }

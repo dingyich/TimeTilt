@@ -36,7 +36,7 @@ func Run() {
 	fmt.Printf("* %v c   $ %.2f    *\n", centBase, bet)
 	fmt.Println("********************")
 	fmt.Printf("Insert bills or tickets. Balance: [$ %.2f].\n", bm.DollarAmount)
-	fmt.Println("Press Enter to play.")
+	fmt.Println("Press Enter to play... ... ... ...")
 
 	var cmd string
 	fmt.Scanln(&cmd)
@@ -62,7 +62,7 @@ func Run() {
 					fmt.Println("Press Enter to start free games...")
 					fmt.Scanln(&cmd)
 				} else {
-					fmt.Println("Press Enter to play.")
+					fmt.Println("Press Enter to play... ... ... ...")
 					fmt.Scanln(&cmd)
 				}
 			}
@@ -80,7 +80,7 @@ func Run() {
 				bm.Deposit(s)
 				time.Sleep(2000 * time.Millisecond)
 				fmt.Printf("Insert bills or tickets. Balance: [$ %.2f].\n", bm.DollarAmount)
-				fmt.Println("Press Enter to play.")
+				fmt.Println("Press Enter to play... ... ... ...")
 				cmd = ""
 				fmt.Scanln(&cmd)
 			}
@@ -101,13 +101,13 @@ func (bm *BuffaloMachine) Step() {
 	fmt.Print("Spinning ")
 	for i := 0; i < 3; i++ {
 		fmt.Print("-")
-		time.Sleep(300 * time.Millisecond)
+		time.Sleep(100 * time.Millisecond)
 		fmt.Print("\\")
-		time.Sleep(300 * time.Millisecond)
+		time.Sleep(100 * time.Millisecond)
 		fmt.Print("|")
-		time.Sleep(300 * time.Millisecond)
+		time.Sleep(100 * time.Millisecond)
 		fmt.Print("/")
-		time.Sleep(300 * time.Millisecond)
+		time.Sleep(100 * time.Millisecond)
 	}
 	fmt.Println()
 
@@ -115,9 +115,8 @@ func (bm *BuffaloMachine) Step() {
 	bm.ShowWindow()
 
 	auditResult := bm.Audit()
-	time.Sleep(2000 * time.Millisecond)
 
-	if auditResult.ScatterCount > 0 {
+	if auditResult.ScatterCount > 2 {
 		bm.triggerFreeGame(auditResult.ScatterCount)
 	}
 	bm.ProcessBalance(auditResult)
@@ -159,13 +158,13 @@ func (bm *BuffaloMachine) FreeGameStep() {
 		fmt.Printf("%d of %d free games spinning ", freegameCount, bm.FreeGames)
 		for i := 0; i < 3; i++ {
 			fmt.Print("-")
-			time.Sleep(300 * time.Millisecond)
+			time.Sleep(100 * time.Millisecond)
 			fmt.Print("\\")
-			time.Sleep(300 * time.Millisecond)
+			time.Sleep(100 * time.Millisecond)
 			fmt.Print("|")
-			time.Sleep(300 * time.Millisecond)
+			time.Sleep(100 * time.Millisecond)
 			fmt.Print("/")
-			time.Sleep(300 * time.Millisecond)
+			time.Sleep(100 * time.Millisecond)
 		}
 		fmt.Println()
 
@@ -173,14 +172,14 @@ func (bm *BuffaloMachine) FreeGameStep() {
 		bm.ShowWindow()
 
 		auditResult := bm.Audit()
-		time.Sleep(2000 * time.Millisecond)
+		time.Sleep(1000 * time.Millisecond)
 
 		if auditResult.ScatterCount > 1 {
 			bm.triggerFreeGame(auditResult.ScatterCount)
 		}
 		bm.ProcessBalance(auditResult)
 
-		time.Sleep(2000 * time.Millisecond)
+		time.Sleep(1000 * time.Millisecond)
 
 		if freegameCount == bm.FreeGames {
 			bm.FreeGameOn = false
@@ -192,6 +191,7 @@ func (bm *BuffaloMachine) FreeGameStep() {
 	fmt.Println("Free game end.")
 	bm.DollarAmount += bm.FreeGameWinning
 	bm.DollarAmount = math.Round(bm.DollarAmount*100) / 100
+	bm.CreditBalance = int64(bm.DollarAmount * 100 / float64(bm.CentBase))
 }
 
 func (bm *BuffaloMachine) ProcessBalance(ar model.AuditResult) {
@@ -213,6 +213,11 @@ func (bm *BuffaloMachine) ProcessBalance(ar model.AuditResult) {
 		winBase := bm.CreditBase / 60 * bm.SpinMultiplyer
 
 		multi := hs.Multiplyer * ar.Multiplyer
+		sleepcount := int(pays * multi * winBase)
+		if sleepcount > 2000 {
+			sleepcount = 2000
+		}
+		time.Sleep(time.Duration(sleepcount) * time.Millisecond)
 		fmt.Printf("%v [%s]s pays %v x %v = %v.\n", num, n, pays*winBase, multi, pays*multi*winBase)
 		creditEarned += int64(pays * multi * winBase)
 	}

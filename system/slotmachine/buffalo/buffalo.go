@@ -397,7 +397,7 @@ func getReelStats(cards []model.Card, windowSize int, freeGameOn bool) model.Ree
 func initm() BuffaloMachine {
 	cardNine := model.Card{
 		Name:      CardNineName,
-		Symbol:    "|   9   |",
+		Symbol:    "|    9    |",
 		IsScatter: false,
 		IsWild:    false,
 		Payrate:   Payrate.CardNinePayrate(),
@@ -405,7 +405,7 @@ func initm() BuffaloMachine {
 
 	cardTen := model.Card{
 		Name:      CardTenName,
-		Symbol:    "|  10   |",
+		Symbol:    "|   10    |",
 		IsScatter: false,
 		IsWild:    false,
 		Payrate:   Payrate.CardTenPayrate(),
@@ -413,7 +413,7 @@ func initm() BuffaloMachine {
 
 	cardJack := model.Card{
 		Name:      CardJackName,
-		Symbol:    "|   J   |",
+		Symbol:    "|    J    |",
 		IsScatter: false,
 		IsWild:    false,
 		Payrate:   Payrate.CardJackPayrate(),
@@ -421,7 +421,7 @@ func initm() BuffaloMachine {
 
 	cardQueen := model.Card{
 		Name:      CardQueenName,
-		Symbol:    "|   Q   |",
+		Symbol:    "|    Q    |",
 		IsScatter: false,
 		IsWild:    false,
 		Payrate:   Payrate.CardQueenPayrate(),
@@ -429,7 +429,7 @@ func initm() BuffaloMachine {
 
 	cardKing := model.Card{
 		Name:      CardKingName,
-		Symbol:    "|   K   |",
+		Symbol:    "|    K    |",
 		IsScatter: false,
 		IsWild:    false,
 		Payrate:   Payrate.CardKingPayrate(),
@@ -437,7 +437,7 @@ func initm() BuffaloMachine {
 
 	cardAce := model.Card{
 		Name:      CardAceName,
-		Symbol:    "|   A   |",
+		Symbol:    "|    A    |",
 		IsScatter: false,
 		IsWild:    false,
 		Payrate:   Payrate.CardAcePayrate(),
@@ -445,7 +445,7 @@ func initm() BuffaloMachine {
 
 	cardEagle := model.Card{
 		Name:      CardEagleName,
-		Symbol:    "| eagle |",
+		Symbol:    "|  eagle  |",
 		IsScatter: false,
 		IsWild:    false,
 		Payrate:   Payrate.CardEaglePayrate(),
@@ -453,7 +453,7 @@ func initm() BuffaloMachine {
 
 	cardTiger := model.Card{
 		Name:      CardTigerName,
-		Symbol:    "| tiger |",
+		Symbol:    "|  tiger  |",
 		IsScatter: false,
 		IsWild:    false,
 		Payrate:   Payrate.CardTigerPayrate(),
@@ -461,7 +461,7 @@ func initm() BuffaloMachine {
 
 	cardWolf := model.Card{
 		Name:      CardWolfName,
-		Symbol:    "|  wolf |",
+		Symbol:    "|   wolf  |",
 		IsScatter: false,
 		IsWild:    false,
 		Payrate:   Payrate.CardWolfPayrate(),
@@ -469,7 +469,7 @@ func initm() BuffaloMachine {
 
 	cardDeer := model.Card{
 		Name:      CardDeerName,
-		Symbol:    "|  deer |",
+		Symbol:    "|   deer  |",
 		IsScatter: false,
 		IsWild:    false,
 		Payrate:   Payrate.CardDeerPayrate(),
@@ -477,7 +477,7 @@ func initm() BuffaloMachine {
 
 	cardBuffalo := model.Card{
 		Name:      CardBuffaloName,
-		Symbol:    "| buffa |",
+		Symbol:    "| BUFFALO |",
 		IsScatter: false,
 		IsWild:    false,
 		Payrate:   Payrate.CardBuffaloPayrate(),
@@ -485,7 +485,7 @@ func initm() BuffaloMachine {
 
 	cardCoin := model.Card{
 		Name:      CardCoinName,
-		Symbol:    "| OOOOO |",
+		Symbol:    "|<<<OOO>>>|",
 		IsScatter: true,
 		IsWild:    false,
 		Payrate:   Payrate.CardCoinPayrate(),
@@ -493,7 +493,7 @@ func initm() BuffaloMachine {
 
 	cardSunset := model.Card{
 		Name:       CardSunsetName,
-		Symbol:     "|  ***  |",
+		Symbol:     "|  XXXXX  |",
 		IsScatter:  false,
 		IsWild:     true,
 		Payrate:    Payrate.CardSunsetPayrate(),
@@ -502,7 +502,7 @@ func initm() BuffaloMachine {
 
 	cardSunset2 := model.Card{
 		Name:       CardSunset2Name,
-		Symbol:     "|  *2*  |",
+		Symbol:     "|   *2*   |",
 		IsScatter:  false,
 		IsWild:     true,
 		Payrate:    Payrate.CardSunsetPayrate(),
@@ -511,76 +511,59 @@ func initm() BuffaloMachine {
 
 	cardSunset3 := model.Card{
 		Name:       CardSunset3Name,
-		Symbol:     "|  *3*  |",
+		Symbol:     "|   *3*   |",
 		IsScatter:  false,
 		IsWild:     true,
 		Payrate:    Payrate.CardSunsetPayrate(),
 		Multiplyer: 3,
 	}
 
+	reelBaseCards := []model.Card{cardNine, cardTen, cardJack, cardQueen, cardKing, cardAce, cardEagle, cardTiger, cardWolf, cardDeer, cardBuffalo, cardCoin, cardSunset}
 	var reelOneCards, reelTwoCards, reelThreeCards, reelFourCards, reelFiveCards []model.Card
-	reelOneCards = []model.Card{cardEagle, cardTiger, cardWolf, cardDeer, cardBuffalo, cardCoin}
-	reelTwoCards = []model.Card{cardCoin, cardSunset, cardSunset2, cardSunset3}
-	reelThreeCards = []model.Card{cardCoin, cardSunset, cardSunset2, cardSunset3}
-	reelFourCards = []model.Card{cardCoin, cardSunset, cardSunset2, cardSunset3}
-	reelFiveCards = []model.Card{cardCoin, cardNine, cardTen, cardJack, cardQueen, cardKing, cardAce}
 
-	for i := 0; i < 2; i++ {
-		reelTwoCards = append(reelTwoCards, cardEagle)
-		reelTwoCards = append(reelTwoCards, cardTiger)
-		reelTwoCards = append(reelTwoCards, cardWolf)
-		reelTwoCards = append(reelTwoCards, cardDeer)
-		reelTwoCards = append(reelTwoCards, cardBuffalo)
-
-		reelFourCards = append(reelFourCards, cardNine)
-		reelFourCards = append(reelFourCards, cardTen)
-		reelFourCards = append(reelFourCards, cardJack)
-		reelFourCards = append(reelFourCards, cardQueen)
-		reelFourCards = append(reelFourCards, cardKing)
-		reelFourCards = append(reelFourCards, cardAce)
+	reelOneConfig := Config.ReelOneConfig()
+	for i := 0; i < len(reelOneConfig); i++ {
+		count := reelOneConfig[i]
+		c := reelBaseCards[i]
+		for j := 0; j < count; j++ {
+			reelOneCards = append(reelOneCards, c)
+		}
 	}
 
-	for i := 0; i < 3; i++ {
-		reelOneCards = append(reelOneCards, cardNine)
-		reelOneCards = append(reelOneCards, cardTen)
-		reelOneCards = append(reelOneCards, cardJack)
-		reelOneCards = append(reelOneCards, cardQueen)
-		reelOneCards = append(reelOneCards, cardKing)
-		reelOneCards = append(reelOneCards, cardAce)
-
-		reelThreeCards = append(reelThreeCards, cardEagle)
-		reelThreeCards = append(reelThreeCards, cardTiger)
-		reelThreeCards = append(reelThreeCards, cardWolf)
-		reelThreeCards = append(reelThreeCards, cardDeer)
-		reelThreeCards = append(reelThreeCards, cardBuffalo)
-
-		reelThreeCards = append(reelThreeCards, cardNine)
-		reelThreeCards = append(reelThreeCards, cardTen)
-		reelThreeCards = append(reelThreeCards, cardJack)
-		reelThreeCards = append(reelThreeCards, cardQueen)
-		reelThreeCards = append(reelThreeCards, cardKing)
-		reelThreeCards = append(reelThreeCards, cardAce)
-
-		reelFourCards = append(reelFourCards, cardEagle)
-		reelFourCards = append(reelFourCards, cardTiger)
-		reelFourCards = append(reelFourCards, cardWolf)
-		reelFourCards = append(reelFourCards, cardDeer)
-		reelFourCards = append(reelFourCards, cardBuffalo)
+	reelTwoConfig := Config.ReelTwoConfig()
+	for i := 0; i < len(reelTwoConfig); i++ {
+		count := reelTwoConfig[i]
+		c := reelBaseCards[i]
+		for j := 0; j < count; j++ {
+			reelTwoCards = append(reelTwoCards, c)
+		}
 	}
 
-	for i := 0; i < 4; i++ {
-		reelTwoCards = append(reelTwoCards, cardNine)
-		reelTwoCards = append(reelTwoCards, cardTen)
-		reelTwoCards = append(reelTwoCards, cardJack)
-		reelTwoCards = append(reelTwoCards, cardQueen)
-		reelTwoCards = append(reelTwoCards, cardKing)
-		reelTwoCards = append(reelTwoCards, cardAce)
+	reelThreeConfig := Config.ReelThreeConfig()
+	for i := 0; i < len(reelThreeConfig); i++ {
+		count := reelThreeConfig[i]
+		c := reelBaseCards[i]
+		for j := 0; j < count; j++ {
+			reelThreeCards = append(reelThreeCards, c)
+		}
+	}
 
-		reelFiveCards = append(reelFiveCards, cardEagle)
-		reelFiveCards = append(reelFiveCards, cardTiger)
-		reelFiveCards = append(reelFiveCards, cardWolf)
-		reelFiveCards = append(reelFiveCards, cardDeer)
-		reelFiveCards = append(reelFiveCards, cardBuffalo)
+	reelFourConfig := Config.ReelFourConfig()
+	for i := 0; i < len(reelFourConfig); i++ {
+		count := reelFourConfig[i]
+		c := reelBaseCards[i]
+		for j := 0; j < count; j++ {
+			reelFourCards = append(reelFourCards, c)
+		}
+	}
+
+	reelFiveConfig := Config.ReelFiveConfig()
+	for i := 0; i < len(reelFiveConfig); i++ {
+		count := reelFiveConfig[i]
+		c := reelBaseCards[i]
+		for j := 0; j < count; j++ {
+			reelFiveCards = append(reelFiveCards, c)
+		}
 	}
 
 	return BuffaloMachine{
