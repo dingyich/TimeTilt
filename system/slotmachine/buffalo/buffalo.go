@@ -380,7 +380,7 @@ func getReelStats(cards []model.Card, windowSize int, freeGameOn bool) model.Ree
 		}
 	}
 
-	if freeGameOn {
+	if freeGameOn && wild {
 		if m == 1 {
 			m = 2
 		}
@@ -682,7 +682,7 @@ func MockMachine() BuffaloMachine {
 
 	cardCoin := model.Card{
 		Name:      CardCoinName,
-		Symbol:    "|   O   |",
+		Symbol:    "|<<<O>>>|",
 		IsScatter: true,
 		IsWild:    false,
 		Payrate:   Payrate.CardCoinPayrate(),
@@ -697,14 +697,14 @@ func MockMachine() BuffaloMachine {
 		Multiplyer: 1,
 	}
 
-	// cardSunset2 := model.Card{
-	// 	Name:       CardSunset2Name,
-	// 	Symbol:     "|  *2*  |",
-	// 	IsScatter:  false,
-	// 	IsWild:     true,
-	// 	Payrate:    Payrate.CardSunsetPayrate(),
-	// 	Multiplyer: 2,
-	// }
+	cardSunset2 := model.Card{
+		Name:       CardSunset2Name,
+		Symbol:     "|  *2*  |",
+		IsScatter:  false,
+		IsWild:     true,
+		Payrate:    Payrate.CardSunsetPayrate(),
+		Multiplyer: 2,
+	}
 
 	cardSunset3 := model.Card{
 		Name:       CardSunset3Name,
@@ -716,11 +716,11 @@ func MockMachine() BuffaloMachine {
 	}
 
 	var reelOneCards, reelTwoCards, reelThreeCards, reelFourCards, reelFiveCards []model.Card
-	reelOneCards = []model.Card{cardJack, cardWolf, cardKing, cardDeer}
-	reelTwoCards = []model.Card{cardWolf, cardSunset3, cardJack, cardBuffalo}
-	reelThreeCards = []model.Card{cardSunset3, cardBuffalo, cardNine, cardKing}
-	reelFourCards = []model.Card{cardAce, cardKing, cardKing, cardQueen}
-	reelFiveCards = []model.Card{cardNine, cardDeer, cardCoin, cardKing}
+	reelOneCards = []model.Card{cardCoin, cardDeer, cardQueen, cardJack}
+	reelTwoCards = []model.Card{cardAce, cardCoin, cardQueen, cardEagle}
+	reelThreeCards = []model.Card{cardKing, cardWolf, cardJack, cardWolf}
+	reelFourCards = []model.Card{cardWolf, cardKing, cardBuffalo, cardAce}
+	reelFiveCards = []model.Card{cardWolf, cardDeer, cardCoin, cardDeer}
 
 	return BuffaloMachine{
 		CardNine:    cardNine,
@@ -736,6 +736,8 @@ func MockMachine() BuffaloMachine {
 		CardBuffalo: cardBuffalo,
 		CardCoin:    cardCoin,
 		CardSunset:  cardSunset,
+		CardSunset2: cardSunset2,
+		CardSunset3: cardSunset3,
 
 		ReelOne:   model.Reel{Cards: reelOneCards},
 		ReelTwo:   model.Reel{Cards: reelTwoCards},
@@ -744,5 +746,17 @@ func MockMachine() BuffaloMachine {
 		ReelFive:  model.Reel{Cards: reelFiveCards},
 
 		WindowSize: 4,
+
+		FreeGameOn:      true,
+		FreeGames:       8,
+		GoldCollected:   0,
+		FreeGameWinning: 0,
+
+		CreditBalance:  17824,
+		CreditBase:     60,
+		CentBase:       100,
+		SpinMultiplyer: 6,
+		DollarAmount:   17824,
+		Bet:            360,
 	}
 }

@@ -25,7 +25,7 @@ const (
 
 type payrate string
 
-func (p payrate) CardCoinPayrate() []int   { return []int{0, 0, 0, 80, 400, 800} }
+func (p payrate) CardCoinPayrate() []int   { return []int{0, 0, 80, 400, 800} }
 func (p payrate) CardSunsetPayrate() []int { return []int{0, 0, 0, 0, 0} }
 
 func (p payrate) CardNinePayrate() []int  { return []int{0, 2, 5, 10, 40} }
