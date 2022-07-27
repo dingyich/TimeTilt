@@ -44,7 +44,7 @@ func Run() {
 	for cmd != "exit" {
 		switch cmd {
 		case "":
-			if !bm.EnoughBalance() {
+			if !bm.EnoughBalance() && !bm.FreeGameOn {
 				fmt.Printf("Insert bills or tickets. Balance: [$ %.2f].\n", bm.DollarAmount)
 				fmt.Scanln(&cmd)
 			} else {
@@ -148,7 +148,6 @@ func (bm *BuffaloMachine) triggerFreeGame(scatterCount int) {
 }
 
 func (bm *BuffaloMachine) FreeGameStep() {
-	bm.FreeGameWinning = 0
 	freegameCount := 0
 	for bm.FreeGameOn {
 		bm.Shuffle()
@@ -192,6 +191,7 @@ func (bm *BuffaloMachine) FreeGameStep() {
 	bm.DollarAmount += bm.FreeGameWinning
 	bm.DollarAmount = math.Round(bm.DollarAmount*100) / 100
 	bm.CreditBalance = int64(bm.DollarAmount * 100 / float64(bm.CentBase))
+	bm.FreeGameWinning = 0
 }
 
 func (bm *BuffaloMachine) ProcessBalance(ar model.AuditResult) {
@@ -223,8 +223,8 @@ func (bm *BuffaloMachine) ProcessBalance(ar model.AuditResult) {
 	}
 
 	if bm.FreeGameOn {
-		fmt.Printf("Free game winning: $ %.2f + $ %.2f = $ %.2f.\n", bm.FreeGameWinning, float64(creditEarned)/100, bm.FreeGameWinning+float64(creditEarned)/100)
-		bm.FreeGameWinning += float64(creditEarned) / 100
+		fmt.Printf("Free game winning: $ %.2f + $ %.2f = $ %.2f.\n", bm.FreeGameWinning, float64(creditEarned*int64(bm.CentBase))/100, bm.FreeGameWinning+float64(creditEarned*int64(bm.CentBase))/100)
+		bm.FreeGameWinning = bm.FreeGameWinning + float64(creditEarned*int64(bm.CentBase))/100
 		bm.FreeGameWinning = math.Round(bm.FreeGameWinning*100) / 100
 	} else {
 		fmt.Printf("Balance: %v + %v = %v.\n", bm.CreditBalance, creditEarned, creditEarned+bm.CreditBalance)
