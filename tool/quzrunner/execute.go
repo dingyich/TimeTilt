@@ -1,10 +1,10 @@
 package main
 
 import (
-	"TimeTilt/tool/quz/maxallignedsubset"
+	"TimeTilt/tool/quz/numberguess"
 )
 
 func main() {
-	maqs := maxallignedsubset.NewQuzSuite()
+	maqs := numberguess.NewQuzSuite()
 	maqs.RunSolution()
 }
